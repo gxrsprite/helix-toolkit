@@ -189,21 +189,21 @@ namespace FileLoadDemo
                 LookDirection = new System.Windows.Media.Media3D.Vector3D(0, -10, -10),
                 Position = new System.Windows.Media.Media3D.Point3D(0, 10, 10),
                 UpDirection = new System.Windows.Media.Media3D.Vector3D(0, 1, 0),
-                FarPlaneDistance = 5000,
-                NearPlaneDistance = 0.1f
+                FarPlaneDistance = 50000,
+                NearPlaneDistance = 0f
             };
             ResetCameraCommand = new DelegateCommand(() =>
             {
                 (Camera as OrthographicCamera).Reset();
-                (Camera as OrthographicCamera).FarPlaneDistance = 5000;
-                (Camera as OrthographicCamera).NearPlaneDistance = 0.1f;
+                (Camera as OrthographicCamera).FarPlaneDistance = 50000;
+                (Camera as OrthographicCamera).NearPlaneDistance = 0f;
             });
             ExportCommand = new DelegateCommand(() => { ExportFile(); });
 
             CopyAsBitmapCommand = new DelegateCommand(() => { CopyAsBitmapToClipBoard(mainWindow.view); });
             CopyAsHiresBitmapCommand = new DelegateCommand(() => { CopyAsHiResBitmapToClipBoard(mainWindow.view); });
 
-            EnvironmentMap = LoadFileToMemory("Cubemap_Grandcanyon.dds");
+            //EnvironmentMap = LoadFileToMemory("Cubemap_Grandcanyon.dds");
         }
 
         private void CopyAsBitmapToClipBoard(Viewport3DX viewport)

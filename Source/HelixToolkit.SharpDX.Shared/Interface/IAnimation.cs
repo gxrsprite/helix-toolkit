@@ -39,6 +39,7 @@ namespace HelixToolkit.UWP
             /// <param name="timeStamp">The time stamp.</param>
             /// <param name="frequency">The frequency.</param>
             void Update(long timeStamp, long frequency);
+            //void Update(float timeElpased); //
             /// <summary>
             /// Resets this animation.
             /// </summary>

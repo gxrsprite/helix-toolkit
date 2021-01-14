@@ -5,6 +5,7 @@ Copyright (c) 2018 Helix Toolkit contributors
 using SharpDX;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 #if !NETFX_CORE
@@ -258,6 +259,37 @@ namespace HelixToolkit.UWP
                 UpdateBoneSkinMesh();
                 UpdateNodes(timeElpased);
                 currentTime = timeStamp;
+            }
+
+            public void Update(float timeElpased)
+            {
+                if (currentTime == 0)
+                {
+                    currentTime = Stopwatch.GetTimestamp();
+                    accumulatedTime = 0;
+                    SetToStart();
+                    return;
+                }
+
+                if (accumulatedTime >= Animation.EndTime)
+                {
+                    switch (RepeatMode)
+                    {
+                        case AnimationRepeatMode.PlayOnce:
+                            UpdateBoneSkinMesh();
+                            SetToStart();
+                            return;
+                        case AnimationRepeatMode.PlayOnceHold:
+                            return;
+                    }
+                }
+                if (accumulatedTime >= Animation.EndTime)
+                {
+                    Reset();
+                }
+                UpdateBoneSkinMesh();
+                UpdateNodes(timeElpased);
+                currentTime = Stopwatch.GetTimestamp();
             }
 
             private void UpdateBoneSkinMesh()
